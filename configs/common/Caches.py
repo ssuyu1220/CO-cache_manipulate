@@ -73,7 +73,7 @@ class L2Cache(Cache):
     write_buffers = 8
 
 class L3Cache(Cache):
-    assoc = 16
+    assoc = 4
     tag_latency = 20
     data_latency = 20
     response_latency = 20
