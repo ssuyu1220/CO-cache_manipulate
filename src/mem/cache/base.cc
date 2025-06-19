@@ -1073,12 +1073,12 @@ BaseCache::access(PacketPtr pkt, CacheBlk *&blk, Cycles &lat,
         // WRITE THROUGH
 	// Write back the block if it is writable when we are doing a normal read/write request
         // This has the same effect as write through policy
-        /*
+
         if (blk->isWritable()) {
             PacketPtr writeclean_pkt = writecleanBlk(blk, pkt->req->getDest(), pkt->id);
             writebacks.push_back(writeclean_pkt);
         }
-        */
+
         return true;
     }
 
