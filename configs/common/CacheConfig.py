@@ -90,6 +90,14 @@ def config_cache(options, system):
                                    size=options.l2_size,
                                    assoc=options.l2_assoc)
 
+        # replacement policy
+        if options.l2_replacement_policy == "LFU":
+            system.l2.replacement_policy = LFURP()
+        elif options.l2_replacement_policy == "MYLRU":
+            system.l2.replacement_policy = MYLRURP()
+        else:
+            system.l2.replacement_policy = LRURP()
+
         system.tol2bus = L2XBar(clk_domain = system.cpu_clk_domain)
 
         system.l2.cpu_side = system.tol2bus.master
@@ -101,6 +109,8 @@ def config_cache(options, system):
             # replacement policy
             if options.l3_replacement_policy == "LFU":
                 system.l3.replacement_policy = LFURP()
+            elif options.l3_replacement_policy == "MYLRU":
+                system.l3.replacement_policy = MYLRURP()
             else:
                 system.l3.replacement_policy = LRURP()
 
