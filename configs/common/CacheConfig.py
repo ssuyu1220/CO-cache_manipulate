@@ -111,6 +111,10 @@ def config_cache(options, system):
                 system.l3.replacement_policy = LFURP()
             elif options.l3_replacement_policy == "MYLRU":
                 system.l3.replacement_policy = MYLRURP()
+            elif options.l3_replacement_policy == "MYLFU":
+                system.l3.replacement_policy = MYLFURP()
+            elif options.l3_replacement_policy == "LRU":
+                system.l3.replacement_policy = LRURP()
             else:
                 system.l3.replacement_policy = LRURP()
 

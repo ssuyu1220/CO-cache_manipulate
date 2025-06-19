@@ -1,14 +1,14 @@
 gem5 Simulator System.  http://gem5.org
 gem5 is copyrighted software; use the --copyright option for details.
 
-gem5 compiled Jun 18 2025 16:32:40
-gem5 started Jun 18 2025 17:07:39
-gem5 executing on CO, pid 12917
-command line: ./build/X86/gem5.opt --outdir=m5out/q3/full-way configs/example/se.py -c quicksort --cpu-type=TimingSimpleCPU --caches --l2cache --l2_size=128kB --l3cache --l3_size=512kB --l3_assoc=8192 --mem-type=NVMainMemory --nvmain-config=../NVmain/Config/PCM_ISSCC_2012_4GB.config
+gem5 compiled Jun 20 2025 04:16:10
+gem5 started Jun 20 2025 04:39:13
+gem5 executing on CO, pid 7852
+command line: ./build/X86-WB/gem5.opt --outdir=m5out/q3/full-way configs/example/se.py -c quicksort --cpu-type=TimingSimpleCPU --caches --l2cache --l2_size=128kB --l3cache --l3_size=512kB --l3_assoc=8192 --mem-type=NVMainMemory --nvmain-config=../NVmain/Config/PCM_ISSCC_2012_4GB.config
 
 Global frequency set at 1000000000000 ticks per second
 NVMainControl: Reading NVMain config file: ../NVmain/Config/PCM_ISSCC_2012_4GB.config.
-0: system.remote_gdb: listening for remote gdb on port 7000
+0: system.remote_gdb: listening for remote gdb on port 7001
 NVMain: GlobalEventQueue: Added a memory subsystem running at 400MHz. My frequency is 2000MHz.
 Config: Warning: Key EIDD0 is not set. Using '85' as the default. Please configure this value if this is wrong.
 Config: Warning: Key EIDD1 is not set. Using '54' as the default. Please configure this value if this is wrong.

@@ -1,10 +1,10 @@
 gem5 Simulator System.  http://gem5.org
 gem5 is copyrighted software; use the --copyright option for details.
 
-gem5 compiled Jun 18 2025 16:32:40
-gem5 started Jun 18 2025 17:32:44
-gem5 executing on CO, pid 13008
-command line: ./build/X86/gem5.opt --outdir=m5out/q5/writeback configs/example/se.py -c multiply --cpu-type=TimingSimpleCPU --caches --l2cache --l2_size=128kB --l3cache --l3_size=512kB --l3_assoc=4 --mem-type=NVMainMemory --nvmain-config=../NVmain/Config/PCM_ISSCC_2012_4GB.config
+gem5 compiled Jun 20 2025 04:16:10
+gem5 started Jun 20 2025 04:44:57
+gem5 executing on CO, pid 7861
+command line: ./build/X86-WB/gem5.opt --outdir=m5out/q5/writeback configs/example/se.py -c multiply --cpu-type=TimingSimpleCPU --caches --l2cache --l2_size=128kB --l3cache --l3_size=512kB --l3_assoc=4 --mem-type=NVMainMemory --nvmain-config=../NVmain/Config/PCM_ISSCC_2012_4GB.config
 
 Global frequency set at 1000000000000 ticks per second
 NVMainControl: Reading NVMain config file: ../NVmain/Config/PCM_ISSCC_2012_4GB.config.

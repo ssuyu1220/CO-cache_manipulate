@@ -771,9 +771,9 @@
             "replacement_policy": {
                 "eventq_index": 0, 
                 "path": "system.l3.replacement_policy", 
-                "type": "LRURP", 
+                "type": "MYLFURP", 
                 "name": "replacement_policy", 
-                "cxx_class": "LRURP"
+                "cxx_class": "MYLFURP"
             }, 
             "cpu_side": {
                 "peer": "system.tol3bus.master[0]", 
@@ -811,7 +811,7 @@
                 "clk_domain": "system.cpu_clk_domain", 
                 "power_model": [], 
                 "sequential_access": false, 
-                "assoc": 8192, 
+                "assoc": 4, 
                 "warmup_percentage": 0, 
                 "cxx_class": "BaseSetAssoc", 
                 "p_state_clk_gate_max": 1000000000000, 
@@ -835,7 +835,7 @@
             "name": "l3", 
             "p_state_clk_gate_bins": 20, 
             "sequential_access": false, 
-            "assoc": 8192
+            "assoc": 4
         }, 
         "cpu_voltage_domain": {
             "name": "cpu_voltage_domain", 
