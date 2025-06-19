@@ -1,13 +1,69 @@
 # NCU CE3001 Final Project - gem5 + NVMain
 ## m5out資料夾結構
+```
+m5out
+├── bonus
+│   ├── LRU
+│   │   ├── config.ini
+│   │   ├── config.json
+│   │   ├── nvmain.log
+│   │   └── stats.txt
+│   └── MYLRU
+│       ├── config.ini
+│       ├── config.json
+│       ├── nvmain.log
+│       └── stats.txt
+├── hello
+│   ├── config.ini
+│   ├── config.json
+│   ├── nvmain.log
+│   └── stats.txt
+├── q1
+│   ├── config.ini
+│   ├── config.json
+│   ├── nvmain.log
+│   └── stats.txt
+├── q2
+│   ├── config.ini
+│   ├── config.json
+│   ├── nvmain.log
+│   └── stats.txt
+├── q3
+│   ├── 2-way
+│   │   ├── config.ini
+│   │   ├── config.json
+│   │   ├── nvmain.log
+│   │   └── stats.txt
+│   └── full-way
+│       ├── config.ini
+│       ├── config.json
+│       ├── nvmain.log
+│       └── stats.txt
+├── q4
+│   ├── LFU
+│   │   ├── config.ini
+│   │   ├── config.json
+│   │   ├── nvmain.log
+│   │   └── stats.txt
+│   └── LRU
+│       ├── config.ini
+│       ├── config.json
+│       ├── nvmain.log
+│       └── stats.txt
+└── q5
+    ├── writeback
+    │   ├── config.ini
+    │   ├── config.json
+    │   ├── nvmain.log
+    │   └── stats.txt
+    └── writethrough
+        ├── config.ini
+        ├── config.json
+        ├── nvmain.log
+        └── stats.txt
+```
 ## Q1 GEM5 + NVMAIN BUILD-UP (40%) 
 照著教學做
-
-執行
-```
-./build/X86/gem5.opt --outdir=m5out/hello configs/example/se.py -c tests/test-progs/hello/bin/x86/linux/hello --cpu-type=TimingSimpleCPU --caches --l2cache --mem-type=NVMainMemory --nvmain-config=../NVmain/Config/PCM_ISSCC_2012_4GB.config 2>&1 | tee m5out/hello/nvmain.log
-```
-將原本放於m5out/的檔案整理在m5out/hello/，並記錄terminal輸出資訊(nvmain log)存於nvmain.log
 ## Q2 Enable L3 last level cache in GEM5 + NVMAIN (15%)
 gem5/configs/common/Options.py
 ```python
@@ -44,7 +100,7 @@ class L3Cache(Cache):
     tgts_per_mshr = 64
     write_buffers = 8
 ```
-gem5/configs/common/CacheOptions.py
+gem5/configs/common/CacheConfig.py
 ```python
 if options.l2cache:
         # Provide a clock for the L2 and the L1-to-L2 bus here as they
@@ -97,8 +153,31 @@ cache_size=512kB
 full-way: l3_assoc=512*1024/64=8192
 ![image](https://github.com/user-attachments/assets/9f405f2e-63ab-4e75-a948-ed128e7ca73c)
 ## Q4 Modify last level cache policy based on frequency based replacement policy (15%)
-
-gem5/configs/common/CacheOptions.py
+```
+src/mem/cache/replacement_policies
+├── base.hh
+├── bip_rp.cc
+├── bip_rp.hh
+├── brrip_rp.cc
+├── brrip_rp.hh
+├── fifo_rp.cc
+├── fifo_rp.hh
+├── lfu_rp.cc
+├── lfu_rp.hh
+├── lru_rp.cc
+├── lru_rp.hh
+├── mru_rp.cc
+├── mru_rp.hh
+├── mylru_rp.cc
+├── mylru_rp.hh
+├── random_rp.cc
+├── random_rp.hh
+├── ReplacementPolicies.py
+├── SConscript
+├── second_chance_rp.cc
+└── second_chance_rp.hh
+```
+gem5/configs/common/CacheConfig.py
 ```python
 if options.l2cache:
     ...
@@ -144,11 +223,22 @@ gem5/src/common/cache/base.cc
 ...
 ```
 
-執行
-
-```bash
-scons -c build/X86/gem5.opt
-scons EXTRAS=../NVmain build/X86/gem5.opt -j 15
-```
 ![image](https://github.com/user-attachments/assets/239364e6-269d-4f5b-8c55-c9999a55ae9b)
 
+## BONUS Design last level cache policy to reduce the energy consumption of pcm_based main memory (Baseline:LRU)
+有試，但效果沒成功
+
+add mylru_rp.cc, mylru_rp.hh in gem5/src/mem/cache/replacement_policies/
+
+gem5/src/mem/cache/replacement_policies/ReplacementPolicies.py
+```python
+class MYLRURP(BaseReplacementPolicy):
+    type = 'MYLRURP'
+    cxx_class = 'MYLRURP'
+    cxx_header = "mem/cache/replacement_policies/mylru_rp.hh"
+```
+gem5/src/mem/cache/replacement_policies/SConscript
+```
+Source('mylru_rp.cc')
+```
+要改Options.py跟CacheConfig.py
