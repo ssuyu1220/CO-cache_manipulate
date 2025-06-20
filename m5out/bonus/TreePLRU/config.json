@@ -769,11 +769,12 @@
         }, 
         "l3": {
             "replacement_policy": {
-                "eventq_index": 0, 
-                "path": "system.l3.replacement_policy", 
-                "type": "LRURP", 
+                "num_leaves": 16, 
                 "name": "replacement_policy", 
-                "cxx_class": "LRURP"
+                "eventq_index": 0, 
+                "cxx_class": "TreePLRURP", 
+                "path": "system.l3.replacement_policy", 
+                "type": "TreePLRURP"
             }, 
             "cpu_side": {
                 "peer": "system.tol3bus.master[0]", 

@@ -115,6 +115,8 @@ def config_cache(options, system):
                 system.l3.replacement_policy = MYLFURP()
             elif options.l3_replacement_policy == "LRU":
                 system.l3.replacement_policy = LRURP()
+            elif options.l3_replacement_policy == "TreePLRU":
+                system.l3.replacement_policy = TreePLRURP(num_leaves=16)
             else:
                 system.l3.replacement_policy = LRURP()
 
